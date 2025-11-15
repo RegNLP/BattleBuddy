@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+
+# Environments
+.venv/
+venv/
+.env
+.env.*
+
+# Data
+data/processed/*
+!data/processed/.gitkeep
+
+# Notebooks
+.ipynb_checkpoints/

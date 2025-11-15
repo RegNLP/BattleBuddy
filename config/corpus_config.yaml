@@ -1,0 +1,29 @@
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  processed_corpus: "data/processed/corpus.jsonl"
+
+chunking:
+  # You can tune these later
+  max_chars: 1200        # approximate chunk size
+  min_chars: 300
+  overlap_chars: 150
+
+categories:
+  lore:
+    raw_subdir: "lore"
+  rules:
+    raw_subdir: "rules"
+  army_guide:
+    raw_subdir: "guides"
+  rules_update:
+    raw_subdir: "rules_update"
+  # optional later:
+  # metagame:
+  #   raw_subdir: "metagame"
+  # youtube:
+  #   raw_subdir: "youtube"
+
+metadata_defaults:
+  source: "unknown"
+  edition: "unspecified"
