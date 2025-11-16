@@ -1,0 +1,12 @@
+cd /Users/tuba.gokhan/Documents/GitHub/BattleBuddy
+
+pip install -r requirements.txt
+
+python src/download_files.py
+
+python -m src.prepare_corpus
+
+python -m src.build_index   
+python -m src.ask "Who are the Stormcast Eternals?"
+python -m src.ask "How does the charge phase work in Age of Sigmar?"
+

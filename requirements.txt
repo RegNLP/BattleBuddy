@@ -1,6 +1,9 @@
 beautifulsoup4
 requests
-pypdf
 tqdm
 python-dotenv
 pyyaml
+PyPDF2
+sentence-transformers
+chromadb
+openai
