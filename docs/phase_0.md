@@ -10,6 +10,7 @@ The actual preprocessing / chunking logic (e.g. prepare_corpus.py) will be imple
 
 Create a new repository, e.g. battlebuddy-aos, with the following base structure:
 
+```text
 battlebuddy-aos/
   config/
     corpus_config.yaml
@@ -38,40 +39,38 @@ battlebuddy-aos/
   .gitignore
   README.md
   requirements.txt
+```
 
 
 You can add / rename folders later, but this gives a clear separation between:
 
 config – project-wide settings
-
 data – raw and processed corpora
-
 docs – design & phase specifications
-
 notebooks – quick analyses and sanity checks
-
 src – library / application code
+
 
 0.2 Python Environment & Requirements (Phase 0)
 
 At this stage you only need basic utilities for fetching, parsing and organizing data.
 
 Create a requirements.txt with:
-
+``` txt
 beautifulsoup4
 requests
 pypdf
 tqdm
 python-dotenv
 pyyaml
-
+```
 
 Later phases will add LLM- and API-related packages (LangChain, LangGraph, sentence-transformers, chromadb, fastapi, streamlit, etc.).
 
 0.3 .gitignore
 
 Add a minimal .gitignore to keep the repo clean:
-
+```
 # Python
 __pycache__/
 *.pyc
@@ -92,7 +91,7 @@ data/processed/*
 
 # Notebooks
 .ipynb_checkpoints/
-
+```
 
 Note: data/processed/* is ignored by default.
 You can later decide whether a specific processed corpus should be versioned.
@@ -101,37 +100,37 @@ You can later decide whether a specific processed corpus should be versioned.
 
 Create config/corpus_config.yaml with basic paths, chunking defaults, and categories.
 These will be consumed in later phases by preprocessing / RAG code.
-
+```
 paths:
-  raw_dir: "data/raw"
-  processed_dir: "data/processed"
-  processed_corpus: "data/processed/corpus.jsonl"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  processed_corpus: "data/processed/corpus.jsonl"
 
 chunking:
-  # Initial defaults – can be tuned later
-  max_chars: 1200        # approximate target chunk size
-  min_chars: 300
-  overlap_chars: 150
+  # Initial defaults – can be tuned later
+  max_chars: 1200        # approximate target chunk size
+  min_chars: 300
+  overlap_chars: 150
 
 categories:
-  lore:
-    raw_subdir: "lore"
-  rules:
-    raw_subdir: "rules"
-  army_guide:
-    raw_subdir: "guides"
-  rules_update:
-    raw_subdir: "rules_update"
-  # optional / advanced (Phase 2+):
-  # metagame:
-  #   raw_subdir: "metagame"
-  # youtube:
-  #   raw_subdir: "youtube"
+  lore:
+    raw_subdir: "lore"
+  rules:
+    raw_subdir: "rules"
+  army_guide:
+    raw_subdir: "guides"
+  rules_update:
+    raw_subdir: "rules_update"
+  # optional / advanced (Phase 2+):
+  # metagame:
+  #   raw_subdir: "metagame"
+  # youtube:
+  #   raw_subdir: "youtube"
 
 metadata_defaults:
-  source: "unknown"
-  edition: "unspecified"
-
+  source: "unknown"
+  edition: "unspecified"
+```
 
 This keeps path and chunking logic out of the code and makes the project feel more “production-like”.
 
@@ -147,7 +146,7 @@ Each entry in `data/processed/corpus.jsonl` is a single JSON object
 representing a chunk of text from an Age of Sigmar source.
 
 ## Required fields
-
+```
 - `id` (string)  
   Unique identifier for the chunk. Recommended format:
   `<domain>_<category>_<slug>_<index>`, e.g.
@@ -189,10 +188,10 @@ representing a chunk of text from an Age of Sigmar source.
 
 - `edition` (string)  
   Game edition or rules context, e.g. `"3rd"`.
-
+```
 ## Example
 
-```json
+``` json
 {
   "id": "aos_lore_stormcast_01",
   "title": "Stormcast Eternals - Overview",
@@ -204,7 +203,7 @@ representing a chunk of text from an Age of Sigmar source.
   "date": "2024-01-01",
   "edition": "3rd"
 }
-
+```
 
 This schema document is what you can later point to in CV / portfolio as “corpus design”.
 
@@ -214,7 +213,7 @@ Phase 0 only requires you to collect and organise AoS content into data/raw/. �
 Parsing, cleaning and chunking will happen in Phase 1.
 
 Create (or confirm) the following subfolders:
-
+```
 data/raw/
   lore/
   rules/
@@ -222,7 +221,7 @@ data/raw/
   rules_update/
   # metagame/    (optional – Phase 2+)
   # youtube/     (optional – Phase 2+)
-
+```
 
 Then:
 
